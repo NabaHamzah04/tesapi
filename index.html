@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>tes API: fakestoreAPI</title>
+</head>
+<body>
+
+    <div id="app">
+        <ul v-for="item in items" :key="item.id">
+            <li>
+                <img :src="item.image" alt="gambar" width="80px">
+                {{ item.title }}
+            </li>
+        </ul>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data() {
+                return {
+                    items: [],
+                    url: `https://fakestoreapi.com/products`,
+                }
+            },
+
+            mounted() {
+                this.ambilData()
+            },
+
+            methods: {
+                ambilData() {
+                    fetch(this.url)
+                        .then((res) => res.json())
+                        .then((data) => this.items = data)
+                }
+            }
+        })
+    </script>
+</body>
+</html>
